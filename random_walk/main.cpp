@@ -3,14 +3,18 @@
 #include <time.h>
 #include <stdlib.h>
 #include <iostream>
+#include "functions.h"
 
 int main(){
+	// time dependend seed
 	srand(time(NULL));
 
-	std::cout << rand();
-	std::cout << '\n';
-	std::cout << time(NULL);
-	std::cout << '\n';
+	unsigned int n = 100;
+
+
+	double r = random_walk_distance(n);
+
+	std::cout << r << '\n';
 
 	return 0;
 }
