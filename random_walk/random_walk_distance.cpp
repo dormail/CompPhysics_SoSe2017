@@ -21,7 +21,8 @@ double random_walk_distance(unsigned int n){
 
 	double r = std::get<0>(end_position) * std::get<0>(end_position);
 	r += std::get<1>(end_position) * std::get<1>(end_position);
-	r = sqrt(r);
+	// Da wir eh die quadratische cluster groesse wollen auskommentiert
+	//r = sqrt(r);
 
 	return r;
 }
