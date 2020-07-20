@@ -9,6 +9,8 @@
 #include <cmath>
 #include "functions.h"
 
+#include <iostream>
+
 std::tuple<int, int> random_walk(unsigned int n){
 	// jeweils eine liste fuer x und y, als int die aktuelle posi
 	std::list<int> x;
@@ -59,15 +61,22 @@ std::tuple<int, int> random_walk(unsigned int n){
 
 		// ueberpruefen ob schon mal an dem ort war
 		y_it = y.begin(); // der y iterator muss manuell zurueck gesetzt werden
-		for(x_it = x.begin(); x_it != x.end(); ++x_it){
-			
-			// abbruch wenn selbstueberschneidung
-			if (*x_it == xnew || *y_it == ynew){
-				test = false;
-				break;
-			}
+		if (i > 0){
+			for(x_it = x.begin(); x_it != (--x.end()); ++x_it){
+				
+				// abbruch wenn selbstueberschneidung
+				if (*x_it == xnew && *y_it == ynew){
+					// Reste vom debuggen
+					//std::cout << *x_it << '\t' << xnew << '\t' << *y_it << '\t' << ynew << '\n';
+					//std::cout << i << '\n';
+					//std::cout << "test2\n";
 
-			++y_it;
+					test = false;
+					throw 1;
+				}
+	
+				++y_it;
+			}
 		}
 	}
 
