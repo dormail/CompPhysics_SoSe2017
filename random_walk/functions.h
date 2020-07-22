@@ -10,6 +10,8 @@ double random_walk_distance(unsigned int n);
 
 double take_average(unsigned int const N, unsigned int const n);
 
+void help();
+
 #endif
 
 /*** functions.h end ***/

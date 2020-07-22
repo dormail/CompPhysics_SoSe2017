@@ -42,22 +42,26 @@ std::tuple<int, int> random_walk(unsigned int n){
 		// switch case fuer bewegung
 		switch(dir){
 			case 0:
-				xnew += 1;
+				xnew = x.back() + 1;
+				ynew = y.back();
 				break;
 			case 1:
-				ynew += 1;
+				xnew = x.back();
+				ynew = y.back() + 1;
 				break;
 			case 2:
-				xnew -= 1;
+				xnew = x.back() - 1;
+				ynew = y.back();
 				break;
 			case 3:
-				ynew -= 1;
+				xnew = x.back();
+				ynew = y.back() - 1;
 				break;
 		}
 	
 		// an liste anhaengen
-		x.push_back(xnew);
-		y.push_back(ynew);
+		//x.push_back(xnew);
+		//y.push_back(ynew);
 
 		// ueberpruefen ob schon mal an dem ort war
 		y_it = y.begin(); // der y iterator muss manuell zurueck gesetzt werden
@@ -71,13 +75,21 @@ std::tuple<int, int> random_walk(unsigned int n){
 					//std::cout << i << '\n';
 					//std::cout << "test2\n";
 
-					test = false;
-					throw 1;
+					test = true;
+					break;
 				}
 	
 				++y_it;
 			}
 		}
+		if (!test){
+			x.push_back(xnew);
+			y.push_back(ynew);
+		}
+		else{
+			--i;
+		}
+		test = false;
 	}
 
 
