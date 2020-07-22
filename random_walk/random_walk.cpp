@@ -35,29 +35,39 @@ std::tuple<int, int> random_walk(unsigned int n){
 
 	bool test = false;
 
+	// if the path is in a one way he needs to restart
+	// break_counter is counting the times the program self crossed
+	// after a few times self crossing it raises an exception
+	unsigned int break_counter = 0;
+
 	for (unsigned int i = 0; i < n; i++){
+		//std::cout << i << '\n';
 		// naechste bewegungsrichtung
 		dir = rand() % 4 + 0;
 		
 		// switch case fuer bewegung
 		switch(dir){
 			case 0:
-				xnew += 1;
+				xnew = x.back() + 1;
+				ynew = y.back();
 				break;
 			case 1:
-				ynew += 1;
+				xnew = x.back();
+				ynew = y.back() + 1;
 				break;
 			case 2:
-				xnew -= 1;
+				xnew = x.back() - 1;
+				ynew = y.back();
 				break;
 			case 3:
-				ynew -= 1;
+				xnew = x.back();
+				ynew = y.back() - 1;
 				break;
 		}
 	
 		// an liste anhaengen
-		x.push_back(xnew);
-		y.push_back(ynew);
+		//x.push_back(xnew);
+		//y.push_back(ynew);
 
 		// ueberpruefen ob schon mal an dem ort war
 		y_it = y.begin(); // der y iterator muss manuell zurueck gesetzt werden
@@ -69,14 +79,32 @@ std::tuple<int, int> random_walk(unsigned int n){
 					// Reste vom debuggen
 					//std::cout << *x_it << '\t' << xnew << '\t' << *y_it << '\t' << ynew << '\n';
 					//std::cout << i << '\n';
-					//std::cout << "test2\n";
+					//std::cout << "self crossing detected\n";
 
-					test = false;
-					throw 1;
+					test = true;
+
+					// if the path is in a one way he needs to restart
+					++break_counter;
+					//std::cout << "Breaks: " << break_counter << '\n';
+
+					break;
 				}
 	
 				++y_it;
 			}
+		}
+		if (!test){
+			x.push_back(xnew);
+			y.push_back(ynew);
+			break_counter = 0;
+		}
+		else{
+			--i;
+		}
+		test = false;
+		// if the path is in a one way he needs to restart
+		if (break_counter > 4){
+			throw 1;
 		}
 	}
 
