@@ -15,6 +15,7 @@ double random_walk_distance(unsigned int n){
 			repeat = false;
 		}
 		catch(int a){
+			std::cout << "exception raised\n";
 		}
 	}
 
