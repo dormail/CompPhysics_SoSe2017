@@ -1,1 +1,1 @@
-# simulation eines Random Walks ohne Selbstueberschneidung
+# Simulation eines Random Walks ohne Selbstueberschneidungen

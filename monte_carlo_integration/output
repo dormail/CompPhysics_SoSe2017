@@ -1,0 +1,19 @@
+Berechnung mit sum. Mittelpunkt
+I_1 = 0.0442563
+I_2 = 0.519688
+I_3 = 0.563892
+Berechnung mit Monte-Carlo Integration
+I_1 = 0.521738
+I_2 = 0.0280348
+I_3 = 0.561656
+Thu 23 Jul 2020 12:36:38 PM CEST
+Thu 23 Jul 2020 12:37:24 PM CEST
+Thu 23 Jul 2020 12:37:37 PM CEST
+Berechnung mit sum. Mittelpunkt
+I_1 = 0.0442563
+I_2 = 0.519688
+I_3 = 0.563892
+Berechnung mit Monte-Carlo Integration
+I_1 = 0.04422
+I_2 = 0.499335
+I_3 = 0.566032
