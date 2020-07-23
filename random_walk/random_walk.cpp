@@ -87,6 +87,7 @@ std::tuple<int, int> random_walk(unsigned int n){
 					++break_counter;
 					//std::cout << "Breaks: " << break_counter << '\n';
 
+					test = true;
 					break;
 				}
 	
@@ -102,10 +103,12 @@ std::tuple<int, int> random_walk(unsigned int n){
 			--i;
 		}
 		test = false;
+    
 		// if the path is in a one way he needs to restart
 		if (break_counter > 4){
 			throw 1;
 		}
+
 	}
 
 

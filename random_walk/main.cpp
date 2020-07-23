@@ -8,6 +8,11 @@
 #include <string>
 
 int main(int argc, char** argv){
+	if (argv[1] == "-h" || argv[1] == "help"){
+		help();
+		return 0;
+	}
+
 	// time dependend seed
 	srand(time(NULL));
 
@@ -17,8 +22,12 @@ int main(int argc, char** argv){
 	unsigned int N = 10000;
 
 	// liest input argument
-	if (argc > 1){
+	if (argc == 2){
 		n = std::stoi(argv[1]);
+	}
+	if (argc == 3){
+		n = std::stoi(argv[1]);
+		N = std::stoi(argv[2]);
 	}
 
 	//double r = random_walk_distance(n);
