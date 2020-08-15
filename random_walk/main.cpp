@@ -59,11 +59,6 @@ int main(int argc, char** argv)
 
 	std::cout << ave << '\n';
 
-	std::cout << "Random walk simulation of "
-		<< N << " walks with range = "
-		<< n << " took " << ((float)t) / CLOCKS_PER_SEC
-		<< " seconds.\n";
-
 	return 0;
 }
 
