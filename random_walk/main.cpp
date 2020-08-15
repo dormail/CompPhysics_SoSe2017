@@ -6,8 +6,15 @@
 #include "functions.h"
 #include <cmath>
 #include <string>
+#include <thread>
 
-int main(int argc, char** argv){
+void run(unsigned int const N, unsigned int const n, double &data)
+{
+	data = sqrt(take_average(N,n));
+}
+
+int main(int argc, char** argv)
+{
 	if (argv[1] == "-h" || argv[1] == "help"){
 		help();
 		return 0;
@@ -17,9 +24,11 @@ int main(int argc, char** argv){
 	srand(time(NULL));
 
 	// n reichweite des walks
-	// N anzahl an tests
+
+	// N anzahl an tests pro thread
 	unsigned int n = 150;
-	unsigned int N = 10000;
+	unsigned int N = 2500;
+
 
 	// liest input argument
 	if (argc == 2){
@@ -30,12 +39,24 @@ int main(int argc, char** argv){
 		N = std::stoi(argv[2]);
 	}
 
-	//double r = random_walk_distance(n);
-	//std::cout << r << '\n';
+	/* 4 threads simultanious */
+	double data1, data2, data3, data4;
+	// initialise threads
+	std::thread t1(run, N, n, std::ref(data1));
+	std::thread t2(run, N, n, std::ref(data2));
+	std::thread t3(run, N, n, std::ref(data3));
 
-	clock_t t = clock();
-	double ave = sqrt(take_average(N,n));
-	t = clock() - t;
+	// one instance in main program
+	run(N, n, std::ref(data4));
+
+	// join the other threads
+	t1.join();
+	t2.join();
+	t3.join();
+
+	double ave = (data1 + data2 + data3 + data4) / 4.0;
+
+
 	std::cout << ave << '\n';
 
 	std::cout << "Random walk simulation of "
