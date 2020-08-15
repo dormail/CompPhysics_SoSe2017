@@ -13,12 +13,6 @@ void run(unsigned int const N, unsigned int const n, double &data)
 	data = sqrt(take_average(N,n));
 }
 
-void test(unsigned int const N, unsigned int const n, double &ref)
-{
-	++ref;
-	std::cout << "test\n";
-}
-
 int main(int argc, char** argv)
 {
 	if (argv[1] == "-h" || argv[1] == "help"){
@@ -30,9 +24,9 @@ int main(int argc, char** argv)
 	srand(time(NULL));
 
 	// n reichweite des walks
-	// N anzahl an tests
-	unsigned int n = 10;
-	unsigned int N = 10000;
+	// N anzahl an tests pro thread
+	unsigned int n = 60;
+	unsigned int N = 5000;
 
 	// liest input argument
 	if (argc == 2){
@@ -43,11 +37,8 @@ int main(int argc, char** argv)
 		N = std::stoi(argv[2]);
 	}
 
-	//double r = random_walk_distance(n);
-	//std::cout << r << '\n';
-
 	/* 2 threads simultanious */
-	N /= 2; // nur halb so gros weil ja zwei threads arbeiten
+	clock_t t = clock();
 	double data1, data2;
 	std::thread t1(run, N, n, std::ref(data1));
 	std::thread t2(run, N, n, std::ref(data2));
@@ -56,9 +47,14 @@ int main(int argc, char** argv)
 	t2.join();
 	
 	double ave = data1 + data2;
+	t = clock() - t;
 
 	// double ave = sqrt(take_average(N,n));
 	std::cout << ave << '\n';
+	std::cout << "Random walk simulation in 2 treads took "
+		<< ((float)t) / CLOCKS_PER_SEC
+		<< " seconds.\n";
+
 
 	return 0;
 }
