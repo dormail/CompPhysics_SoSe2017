@@ -6,8 +6,21 @@
 #include "functions.h"
 #include <cmath>
 #include <string>
+#include <thread>
 
-int main(int argc, char** argv){
+void run(unsigned int const N, unsigned int const n, double &data)
+{
+	data = sqrt(take_average(N,n));
+}
+
+void test(unsigned int const N, unsigned int const n, double &ref)
+{
+	++ref;
+	std::cout << "test\n";
+}
+
+int main(int argc, char** argv)
+{
 	if (argv[1] == "-h" || argv[1] == "help"){
 		help();
 		return 0;
@@ -32,8 +45,19 @@ int main(int argc, char** argv){
 
 	//double r = random_walk_distance(n);
 	//std::cout << r << '\n';
+
+	/* 2 threads simultanious */
+	N /= 2; // nur halb so gros weil ja zwei threads arbeiten
+	double data1, data2;
+	std::thread t1(run, N, n, std::ref(data1));
+	std::thread t2(run, N, n, std::ref(data2));
 	
-	double ave = sqrt(take_average(N,n));
+	t1.join();
+	t2.join();
+	
+	double ave = data1 + data2;
+
+	// double ave = sqrt(take_average(N,n));
 	std::cout << ave << '\n';
 
 	return 0;
