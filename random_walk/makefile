@@ -11,6 +11,7 @@ build: main.cpp random_walk.cpp functions.h random_walk_distance.cpp take_averag
 		-o random_walk.o \
 		-lpthread
 
+
 test: random_walk_test.cpp random_walk.cpp functions.h random_walk_distance.cpp take_average.cpp
 	clear
 	g++ \

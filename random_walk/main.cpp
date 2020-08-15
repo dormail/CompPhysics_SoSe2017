@@ -24,9 +24,11 @@ int main(int argc, char** argv)
 	srand(time(NULL));
 
 	// n reichweite des walks
+
 	// N anzahl an tests pro thread
 	unsigned int n = 150;
 	unsigned int N = 2500;
+
 
 	// liest input argument
 	if (argc == 2){
@@ -54,8 +56,13 @@ int main(int argc, char** argv)
 
 	double ave = (data1 + data2 + data3 + data4) / 4.0;
 
-	// double ave = sqrt(take_average(N,n));
+
 	std::cout << ave << '\n';
+
+	std::cout << "Random walk simulation of "
+		<< N << " walks with range = "
+		<< n << " took " << ((float)t) / CLOCKS_PER_SEC
+		<< " seconds.\n";
 
 	return 0;
 }
