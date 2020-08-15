@@ -5,7 +5,7 @@ clear:
 
 einheitskugel: einheitskugel.cpp
 	clear
-	g++ einheitskugel.cpp -o einheitskugel.o
+	g++ einheitskugel.cpp -o einheitskugel.o -lpthread
 
 e_fkt: e_fkt.cpp
 	clear
