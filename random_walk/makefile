@@ -2,7 +2,6 @@ clear:
 	rm -rf random_walk.o random_walk_test.o
 
 build: main.cpp random_walk.cpp functions.h random_walk_distance.cpp take_average.cpp help.cpp
-	clear
 	g++ \
 		take_average.cpp \
 		main.cpp \

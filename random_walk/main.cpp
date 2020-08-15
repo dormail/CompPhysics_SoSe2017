@@ -25,7 +25,7 @@ int main(int argc, char** argv)
 
 	// n reichweite des walks
 	// N anzahl an tests pro thread
-	unsigned int n = 60;
+	unsigned int n = 100;
 	unsigned int N = 5000;
 
 	// liest input argument
@@ -39,22 +39,32 @@ int main(int argc, char** argv)
 
 	/* 2 threads simultanious */
 	clock_t t = clock();
-	double data1, data2;
+	double data1, data2, data3, data4;
+	// initialise threads
 	std::thread t1(run, N, n, std::ref(data1));
 	std::thread t2(run, N, n, std::ref(data2));
-	
+	std::thread t3(run, N, n, std::ref(data3));
+
+	run(N, n, std::ref(data4));
+
 	t1.join();
 	t2.join();
-	
-	double ave = data1 + data2;
+	t3.join();
+
+	double ave = (data1 + data2 + data3 + data4) / 4.0;
 	t = clock() - t;
 
 	// double ave = sqrt(take_average(N,n));
 	std::cout << ave << '\n';
-	std::cout << "Random walk simulation in 2 treads took "
+	std::cout << "Random walk simulation with range = "
+		<< n << ", computed with 4 treads took "
 		<< ((float)t) / CLOCKS_PER_SEC
 		<< " seconds.\n";
 
+	std::cout << "data1 = " << data1 << '\n'
+		<< "data2 = " << data2 << '\n'
+		<< "data3 = " << data3 << '\n'
+		<< "data4 = " << data4 << '\n';
 
 	return 0;
 }
