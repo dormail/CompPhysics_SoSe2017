@@ -18,7 +18,7 @@ int main(int argc, char** argv){
 
 	// n reichweite des walks
 	// N anzahl an tests
-	unsigned int n = 60;
+	unsigned int n = 100;
 	unsigned int N = 10000;
 
 	// liest input argument
