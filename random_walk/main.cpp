@@ -18,7 +18,7 @@ int main(int argc, char** argv){
 
 	// n reichweite des walks
 	// N anzahl an tests
-	unsigned int n = 10;
+	unsigned int n = 60;
 	unsigned int N = 10000;
 
 	// liest input argument
@@ -32,9 +32,16 @@ int main(int argc, char** argv){
 
 	//double r = random_walk_distance(n);
 	//std::cout << r << '\n';
-	
+
+	clock_t t = clock();
 	double ave = sqrt(take_average(N,n));
+	t = clock() - t;
 	std::cout << ave << '\n';
+
+	std::cout << "Random walk simulation of "
+		<< N << " walks with range = "
+		<< n << " took " << ((float)t) / CLOCKS_PER_SEC
+		<< " seconds.\n";
 
 	return 0;
 }
