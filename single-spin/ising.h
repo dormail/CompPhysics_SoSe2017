@@ -14,9 +14,13 @@ private:
     std::uniform_real_distribution<> dis;
     int s;
     double H;
+    double beta; // beta = k_B * T
+
 public:
     spin();
-    void flip();
+    spin(double b, double H);
+    void move();
+    void run(unsigned int n);
 };
 
 #endif //COMPPHYSICS_SOSE2017_ISING_H
