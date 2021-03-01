@@ -1,15 +1,15 @@
-all: ising
+all: spin
 
-ising: ising.h ising.cpp main.cpp
+spin: spin.h spin.cpp main.cpp
 	g++ \
 		main.cpp \
-		ising.h ising.cpp \
-		-o ising
+		spin.h spin.cpp \
+		-o spin
 
-result.txt: ising
-	./ising > result.txt
+result.txt: spin
+	./spin > result.txt
 
 clean:
-	rm -rf result.txt ising
+	rm -rf result.txt spin
 
 .PHONY: clean result.txt

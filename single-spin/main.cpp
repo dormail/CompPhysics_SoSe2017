@@ -2,7 +2,7 @@
 // Created by mmaile on 3/1/21.
 //
 
-#include "ising.h"
+#include "spin.h"
 #include <iostream>
 
 int main(int argc, char *argv[]){
