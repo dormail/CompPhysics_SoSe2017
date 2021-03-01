@@ -19,8 +19,12 @@ private:
 public:
     spin();
     spin(double b, double H);
+
+    void random_test();
+
+    void set_H(double H_new);
     void move();
-    void run(unsigned int n);
+    double run(unsigned int n);
 };
 
 #endif //COMPPHYSICS_SOSE2017_ISING_H
