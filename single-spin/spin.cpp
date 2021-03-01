@@ -2,7 +2,7 @@
 // Created by mmaile on 3/1/21.
 //
 
-#include "ising.h"
+#include "spin.h"
 #include <iostream>
 #include <random>
 #include <math.h>
