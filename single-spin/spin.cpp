@@ -58,5 +58,5 @@ double spin::run(unsigned int n){
         move();
         m += s;
     }
-    return m/100000.;
+    return m/(double) n;
 }
