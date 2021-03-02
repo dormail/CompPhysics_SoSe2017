@@ -27,9 +27,9 @@ dis_int(0, n-1)
 
 int ising::get_spin(int x, int y) {
     if(x >= N)
-        throw std::out_of_range("x >= N");
+        throw std::out_of_range("ising::get_spin(x,y): x >= N");
     if(y >= N)
-        throw std::out_of_range("y >= N");
+        throw std::out_of_range("ising::get_spin(x,y): y >= N");
     return grid.at(N*y + x);
 }
 
@@ -43,9 +43,9 @@ void ising::set_spin(int x, int y, int value) {
 
 void ising::flip_spin(int x, int y) {
     if(x >= N)
-        throw std::out_of_range("x >= N");
+        throw std::out_of_range("ising::flip_spin: x >= N");
     if(y >= N)
-        throw std::out_of_range("y >= N");
+        throw std::out_of_range("ising::flip_spin: y >= N");
     grid.at(N*y + x) *= -1;
 }
 
