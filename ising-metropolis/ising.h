@@ -28,21 +28,25 @@ public:
     ising(size_t n, double b);
     ising(size_t n, double b, unsigned int seed);
 
-    int get_spin(int x, int y);
-    void set_spin(int x, int y, int value);
-    void flip_spin(int x, int y);
-
-    void set_beta(double b);
-
-    void print();
-    void print(char symbol);
-
     /* randomizer seeding */
     void seed_random();
 
-    /* methods for simulation */
+    /* get/set methods */
+    int get_spin(int x, int y);
+    void set_spin(int x, int y, int value);
+    void set_beta(double b);
     void random(); // sets all spins to random states
+    void set_all(int value);
+
+    void flip_spin(int x, int y);
+
+    /* print methods */
+    void print();
+    void print(char symbol);
+
+    /* methods for simulation */
     int sum_next_neighbour(int x, int y);
+    double energy_density();
 
     void move(); // offer a random spin a flip
     void sweep(); // offer a spin flip to N*N random spins

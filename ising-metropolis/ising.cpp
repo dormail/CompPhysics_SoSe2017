@@ -9,6 +9,8 @@
 #include <math.h>
 #include <chrono>
 #include <thread>
+#include <fstream>
+#include <string>
 
 
 ising::ising(size_t n, double b) :
@@ -97,6 +99,16 @@ int ising::sum_next_neighbour(int x, int y) {
     return s;
 }
 
+double ising::energy_density() {
+    int sum = 0;
+    for (unsigned int i = 0; i < N; ++i) {
+        for (unsigned int j = 0; j < N; ++j) {
+            sum -= get_spin(i,j) * sum_next_neighbour(i,j);
+        }
+    }
+    return sum /(double) (N*N);
+}
+
 /* a function setting every spin to a random +/-1 spin */
 void ising::random() {
     for(unsigned int i = 0; i < N; ++i){
@@ -105,6 +117,14 @@ void ising::random() {
                 set_spin(i,j,1);
             else
                 set_spin(i,j,-1);
+        }
+    }
+}
+
+void ising::set_all(int value) {
+    for (unsigned int i = 0; i < N; ++i) {
+        for (unsigned int j = 0; j < N; ++j) {
+            set_spin(i, j, value);
         }
     }
 }
@@ -166,10 +186,22 @@ void ising::run(unsigned int n){
 }
 
 void ising::live_simul() {
-    while(true){
-        print();
-        sweep();
+    std::cout << "\033[2J\033[1;1H";
+
+    std::ofstream output("e_t.dat");
+    double energy;
+
+    for (int i = 0; i < 3e2; ++i){
         std::cout << "\033[2J\033[1;1H";
-        std::this_thread::sleep_for(std::chrono::milliseconds (80));
+        print();
+
+        energy = energy_density();
+        std::cout << energy << '\n';
+
+
+        output << energy << '\n';
+        sweep();
+        //std::this_thread::sleep_for(std::chrono::milliseconds (50));
     }
+    output.close();
 }
