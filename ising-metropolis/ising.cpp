@@ -53,6 +53,9 @@ void ising::set_beta(double b) {
     beta = b;
 }
 
+/* calculating sum over the spins to the next neighbours of (x,y),
+ * with periodic behavior at the boundries
+ */
 int ising::sum_next_neighbour(int x, int y) {
     int s = 0;
 
@@ -65,9 +68,11 @@ int ising::sum_next_neighbour(int x, int y) {
             s += get_spin(0, y);
             s += get_spin(N-2, y);
         }
-        // if it is neither we can just sum up
-        s += get_spin(x-1, y);
-        s += get_spin(x+1, y);
+        else {
+            // if it is neither we can just sum up
+            s += get_spin(x - 1, y);
+            s += get_spin(x + 1, y);
+        }
     }
 
     // same with up/down for y
@@ -80,10 +85,13 @@ int ising::sum_next_neighbour(int x, int y) {
             s += get_spin(x, 0);
             s += get_spin(x, N-2);
         }
-        s += get_spin(x, y-1);
-        s += get_spin(x, y+1);
+        else {
+            s += get_spin(x, y - 1);
+            s += get_spin(x, y + 1);
+        }
     }
-    return 0;
+
+    return s;
 }
 
 /* a function setting every spin to a random +/-1 spin */
