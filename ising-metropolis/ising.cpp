@@ -9,7 +9,6 @@
 #include <math.h>
 #include <chrono>
 #include <thread>
-#include "my_random.h"
 
 
 ising::ising(size_t n, double b) :
