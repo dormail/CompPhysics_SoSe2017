@@ -14,7 +14,6 @@ private:
     std::vector<int> grid;
 
     /* rng stuff */
-    std::random_device rd;
     std::mt19937 gen;
     std::uniform_real_distribution<> dis_real;
     std::uniform_int_distribution<> dis_int;
@@ -27,6 +26,7 @@ private:
 public:
     ising(size_t n);
     ising(size_t n, double b);
+    ising(size_t n, double b, unsigned int seed);
 
     int get_spin(int x, int y);
     void set_spin(int x, int y, int value);
@@ -37,6 +37,9 @@ public:
     void print();
     void print(char symbol);
 
+    /* randomizer seeding */
+    void seed_random();
+
     /* methods for simulation */
     void random(); // sets all spins to random states
     int sum_next_neighbour(int x, int y);
@@ -44,6 +47,8 @@ public:
     void move(); // offer a random spin a flip
     void sweep(); // offer a spin flip to N*N random spins
     void run(unsigned int n);
+
+    void live_simul();
 };
 
 #endif //COMPPHYSICS_SOSE2017_ISING_H

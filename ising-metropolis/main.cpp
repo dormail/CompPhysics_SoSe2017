@@ -4,18 +4,17 @@
 
 #include "ising.h"
 #include <iostream>
+#include <chrono>
+#include <thread>
 
 int main(int argc, char *argv[]){
-    ising s(20, 3);
+    unsigned int seed = std::chrono::system_clock::now().time_since_epoch().count();
+    ising s(100, 2.27, seed);
 
     s.random();
-    //s.random();
 
-    std::cout << "Vor dem move:\n";
     s.print();
-    std::cout << "Nach dem sweep\n";
-    s.run(1e5);
-    s.print();
+    s.live_simul();
 
 
     return 0;

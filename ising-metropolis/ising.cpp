@@ -148,7 +148,7 @@ void ising::move() {
 
     double dE = get_spin(x, y) * sum * 2.;
     double p = dis_real(gen);
-    if (p < exp(-1 * beta * dE))
+    if (p < exp(-1 * dE / beta))
     {
         flip_spin(x,y);
         return;
@@ -163,5 +163,14 @@ void ising::sweep() {
 void ising::run(unsigned int n){
     for(unsigned int i = 0; i < n; ++i){
         sweep();
+    }
+}
+
+void ising::live_simul() {
+    while(true){
+        print();
+        sweep();
+        std::cout << "\033[2J\033[1;1H";
+        std::this_thread::sleep_for(std::chrono::milliseconds (80));
     }
 }
