@@ -48,3 +48,78 @@ void ising::flip_spin(int x, int y) {
 void ising::set_beta(double b) {
     beta = b;
 }
+
+int ising::sum_next_neighbour(int x, int y) {
+    int s = 0;
+
+    if(x == 0){ // if coord is at the left end of the grid
+        s += get_spin(N-1, y);
+        s += get_spin(1, y);
+    }
+    else{
+        if(x == N-1){ // if coord is at the right end of the grid
+            s += get_spin(0, y);
+            s += get_spin(N-2, y);
+        }
+        // if it is neither we can just sum up
+        s += get_spin(x-1, y);
+        s += get_spin(x+1, y);
+    }
+
+    // same with up/down for y
+    if(y == 0){
+        s += get_spin(x, N-1);
+        s += get_spin(x, 1);
+    }
+    else{
+        if(y == N-1){
+            s += get_spin(x, 0);
+            s += get_spin(x, N-2);
+        }
+        s += get_spin(x, y-1);
+        s += get_spin(x, y+1);
+    }
+    return 0;
+}
+
+/* a function setting every spin to a random +/-1 spin */
+void ising::random() {
+    for(unsigned int i = 0; i < N; ++i){
+        for(unsigned int j = 0; j < N; ++j){
+            if(dis_real(gen) <= 0.5)
+                set_spin(i,j,1);
+            else
+                set_spin(i,j,-1);
+        }
+    }
+}
+
+/* print functions:
+ * print(char symbol) prints the grid with symbol when grid(x,y) > 0
+ * print() defaults to '#'
+ */
+void ising::print() {
+    print('#');
+}
+
+void ising::print(char symbol){
+    for(unsigned int i = 0; i < N; ++i){
+        for(unsigned int j = 0; j < N; ++j) {
+            if(get_spin(i,j) > 0)
+                std::cout << symbol;
+            else
+                std::cout << ' ';
+        }
+        std::cout << '\n';
+    }
+}
+
+void ising::move() {
+    // get random coordinate
+    int x = dis_int(gen);
+    int y = dis_int(gen);
+
+    int sum = sum_next_neighbour(x,y);
+    std::cout << sum << '\n';
+
+}

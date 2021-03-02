@@ -32,6 +32,14 @@ public:
     void flip_spin(int x, int y);
 
     void set_beta(double b);
+
+    void print();
+    void print(char symbol);
+
+    /* methods for simulation */
+    void random();
+    int sum_next_neighbour(int x, int y);
+    void move();
 };
 
 #endif //COMPPHYSICS_SOSE2017_ISING_H
