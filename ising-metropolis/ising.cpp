@@ -7,24 +7,27 @@
 #include <stdexcept>
 #include <iostream>
 #include <math.h>
+#include <chrono>
+#include <thread>
+#include "my_random.h"
 
-ising::ising(size_t n) : grid(n*n), N(n)
-{
-    std::mt19937 gen(rd());
-    std::uniform_real_distribution<> dis_real(0.0, 1.0);
-    std::uniform_int_distribution<> dis_int(0,n-1);
-}
 
 ising::ising(size_t n, double b) :
-grid(n*n),
-N(n),
-beta(b),
-dis_int(0, n-1)
-{
-    std::mt19937 gen(rd());
-    std::uniform_real_distribution<> dis_real(0.0, 1.0);
-    //std::uniform_int_distribution<> dis_int(0,n-1);
-}
+        grid(n*n),
+        N(n),
+        beta(b),
+        dis_int(0, n-1),
+        dis_real(0.0, 1.0)
+{}
+
+ising::ising(size_t n, double b, unsigned int seed) :
+        grid(n*n),
+        N(n),
+        beta(b),
+        dis_int(0, n-1),
+        dis_real(0.0, 1.0),
+        gen(seed)
+{}
 
 int ising::get_spin(int x, int y) {
     if(x >= N)
