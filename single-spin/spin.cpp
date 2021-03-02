@@ -9,8 +9,8 @@
 
 spin::spin(){
     s = 1;
-    double H = 1;
-    double b = 1;
+    H = 1.;
+    beta = 1.;
     std::mt19937 gen(rd());
     std::uniform_real_distribution<> dis(0.0, 1.0);
 }
