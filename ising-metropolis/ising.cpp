@@ -6,6 +6,7 @@
 #include <vector>
 #include <stdexcept>
 #include <iostream>
+#include <math.h>
 
 ising::ising(size_t n) : grid(n*n), N(n)
 {
@@ -131,7 +132,33 @@ void ising::move() {
     int x = dis_int(gen);
     int y = dis_int(gen);
 
-    int sum = sum_next_neighbour(x,y);
-    std::cout << sum << '\n';
+    if (x >= N)
+        std::cout << "bax x: x = " << x << "\n";
 
+    int sum = sum_next_neighbour(x, y);
+
+
+    if (get_spin(x, y) * sum < 0) {
+        flip_spin(x, y);
+        return;
+    }
+
+    double dE = get_spin(x, y) * sum * 2.;
+    double p = dis_real(gen);
+    if (p < exp(-1 * beta * dE))
+    {
+        flip_spin(x,y);
+        return;
+    }
+}
+
+void ising::sweep() {
+    for (unsigned int i = 0; i < N*N; ++i)
+        move();
+}
+
+void ising::run(unsigned int n){
+    for(unsigned int i = 0; i < n; ++i){
+        sweep();
+    }
 }

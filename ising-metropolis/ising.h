@@ -38,9 +38,12 @@ public:
     void print(char symbol);
 
     /* methods for simulation */
-    void random();
+    void random(); // sets all spins to random states
     int sum_next_neighbour(int x, int y);
-    void move();
+
+    void move(); // offer a random spin a flip
+    void sweep(); // offer a spin flip to N*N random spins
+    void run(unsigned int n);
 };
 
 #endif //COMPPHYSICS_SOSE2017_ISING_H

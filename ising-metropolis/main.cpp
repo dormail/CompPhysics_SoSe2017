@@ -6,12 +6,16 @@
 #include <iostream>
 
 int main(int argc, char *argv[]){
-    ising s(5);
+    ising s(20, 3);
 
-    s.set_spin(1,1, 5);
-    s.flip_spin(1,1);
+    s.random();
+    //s.random();
 
-    std::cout << s.get_spin(1,1) << '\n';
+    std::cout << "Vor dem move:\n";
+    s.print();
+    std::cout << "Nach dem sweep\n";
+    s.run(1e5);
+    s.print();
 
 
     return 0;
