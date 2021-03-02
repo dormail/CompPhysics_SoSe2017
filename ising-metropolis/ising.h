@@ -18,12 +18,20 @@ private:
     std::mt19937 gen;
     std::uniform_real_distribution<> dis;
 
+    /* varaibles for the simulation
+     * beta= k_B * T
+     */
+    double beta;
+
 public:
     ising(size_t n);
+    ising(size_t n, double b);
 
     int get_spin(int x, int y);
     void set_spin(int x, int y, int value);
     void flip_spin(int x, int y);
+
+    void set_beta(double b);
 };
 
 #endif //COMPPHYSICS_SOSE2017_ISING_H

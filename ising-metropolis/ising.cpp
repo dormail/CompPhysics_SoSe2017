@@ -5,11 +5,17 @@
 #include "ising.h"
 #include <vector>
 
-ising::ising(size_t n) : grid(n*n)
+ising::ising(size_t n) : grid(n*n), N(n)
 {
-    N = n;
-    //std::vector<int> grid(n);
+    std::mt19937 gen(rd());
+    std::uniform_real_distribution<> dis(0.0, 1.0);
+}
 
+ising::ising(size_t n, double b) :
+grid(n*n),
+N(n),
+beta(b)
+{
     std::mt19937 gen(rd());
     std::uniform_real_distribution<> dis(0.0, 1.0);
 }
@@ -24,4 +30,8 @@ void ising::set_spin(int x, int y, int value) {
 
 void ising::flip_spin(int x, int y) {
     grid.at(N*y + x) *= -1;
+}
+
+void ising::set_beta(double b) {
+    beta = b;
 }
