@@ -1,16 +1,9 @@
 # plot.py
 
-import numpy as np
-import matplotlib.pyplot as plt
-import os
+from compare_initial import compare_initial
 
-os.system("./ising 1.0")
-
-fn = "e_t.dat"
-m = np.genfromtxt(fn)
-t = np.linspace(0, len(m)-1, num=len(m))
-
-plt.plot(t, m)
-plt.title('e(t) with k_B T = 1.0')
-
-plt.show()
+compare_initial(1.0, 10000)
+compare_initial(1.9, 1000)
+compare_initial(2.2, 1000)
+compare_initial(2.5, 300)
+compare_initial(3.0, 100)
