@@ -191,17 +191,24 @@ void ising::live_simul() {
     std::ofstream output("e_t.dat");
     double energy;
 
-    for (int i = 0; i < 3e2; ++i){
-        std::cout << "\033[2J\033[1;1H";
+    while(true){
         print();
 
         energy = energy_density();
-        std::cout << energy << '\n';
-
-
-        output << energy << '\n';
+        //output << energy << '\n';
         sweep();
-        //std::this_thread::sleep_for(std::chrono::milliseconds (50));
+
+        std::this_thread::sleep_for(std::chrono::milliseconds (10));
+        std::cout << "\033[2J\033[1;1H";
+    }
+    output.close();
+}
+
+void ising::simulate_initial_phase(unsigned int const n){
+    std::ofstream output("e_t.dat");
+    for (unsigned int i = 0; i < n; ++i){
+        output << energy_density() << '\n';
+        sweep();
     }
     output.close();
 }

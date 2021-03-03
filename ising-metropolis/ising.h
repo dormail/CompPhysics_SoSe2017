@@ -53,6 +53,8 @@ public:
     void run(unsigned int n);
 
     void live_simul();
+
+    void simulate_initial_phase(unsigned int const n);
 };
 
 #endif //COMPPHYSICS_SOSE2017_ISING_H

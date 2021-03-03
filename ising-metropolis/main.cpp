@@ -3,9 +3,8 @@
 //
 
 #include "ising.h"
-#include <iostream>
+#include <string>
 #include <chrono>
-#include <thread>
 
 int main(int argc, char *argv[]){
     double beta = 1.;
@@ -13,13 +12,17 @@ int main(int argc, char *argv[]){
         beta = atof(argv[1]);
     }
     unsigned int seed = std::chrono::system_clock::now().time_since_epoch().count();
-    ising s(100, beta, seed);
+    ising grid(80, beta, seed);
+    grid.set_all(1);
 
-    //s.set_all(1);
-    s.random();
+    std::string argv2;
+    if(argc >= 3){
+        argv2.assign(argv[2]);
+        if(argv2.compare("--random") == 0)
+            grid.random();
+    }
 
-    s.live_simul();
-
+    grid.live_simul();
 
     return 0;
 }
