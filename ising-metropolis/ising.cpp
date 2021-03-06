@@ -198,7 +198,7 @@ void ising::live_simul() {
         //output << energy << '\n';
         sweep();
 
-        std::this_thread::sleep_for(std::chrono::milliseconds (10));
+        std::this_thread::sleep_for(std::chrono::milliseconds (70));
         std::cout << "\033[2J\033[1;1H";
     }
     output.close();
