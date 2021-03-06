@@ -38,9 +38,9 @@ Eigen::MatrixXd jacobi_rotation(Eigen::MatrixXd A)
     double c, s, theta, t;
     Eigen::MatrixXd P;
 
-    for (int p = 0; p < n-1; ++p)
+    for (int p = 0; p < n; ++p)
     {
-        for (int q = p+1; q < n-1; ++q)
+        for (int q = p+1; q < n; ++q)
         {
             if (p == q)
                 continue;
