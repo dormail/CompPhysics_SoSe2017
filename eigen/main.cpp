@@ -16,7 +16,14 @@ int main()
     std::cout << "Matrix m:\n" << m << '\n';
 
     Eigen::MatrixXd A = householder(m);
-    std::cout << "Matrix A:\n" << A << '\n';
+    std::cout << "Matrix after householder:\n" << A << '\n';
+
+    for (int i = 0; i < 20; ++i)
+        A = jacobi_rotation(A);
+    std::cout << "Matrix after jacobi rotation:\n" << A << '\n';
+
+    std::cout << "Computation with the Eigen library:\n" << m.eigenvalues() << '\n';
+
 
 
 
