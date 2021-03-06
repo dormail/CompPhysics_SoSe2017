@@ -20,7 +20,6 @@ Eigen::MatrixXd householder(Eigen::MatrixXd A)
     int n = A.rows();
     // first step
     Eigen::VectorXd a = A.block(1,0, A.rows()-1, 1);
-    std::cout << a << '\n';
     double sum = a.adjoint() * a;
     double alpha = -1 * sgn(A(1,0)) * sqrt(sum);
 
@@ -33,15 +32,10 @@ Eigen::MatrixXd householder(Eigen::MatrixXd A)
 
     Eigen::MatrixXd P(n,n);
     P = Eigen::MatrixXd::Identity(n,n);
-    //std::cout << P << '\n';
     P -= 2 * v * v.adjoint();
-
-    std::cout << "v:\n" << v << '\n';
-    std::cout << "P:\n" << P << '\n';
 
     A = P * A * P;
 
-    std::cout << "After first iteration:\n" << A << '\n';
 
     // next steps as a iteration
     for (int k = 1; k < n-2; ++k)

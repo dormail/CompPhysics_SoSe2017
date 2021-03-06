@@ -18,7 +18,7 @@ int main()
     Eigen::MatrixXd A = householder(m);
     std::cout << "Matrix after householder:\n" << A << '\n';
 
-    for (int i = 0; i < 20; ++i)
+    for (int i = 0; i < 4; ++i)
         A = jacobi_rotation(A);
     std::cout << "Matrix after jacobi rotation:\n" << A << '\n';
 
