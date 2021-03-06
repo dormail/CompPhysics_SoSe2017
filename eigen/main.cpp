@@ -13,7 +13,12 @@ int main()
             1, 1, 3, 1, 1,
             1, 1, 1, 4, 1,
             1, 1, 1, 1, 5;
-    std::cout << m << '\n';
+    std::cout << "Matrix m:\n" << m << '\n';
+
+    Eigen::MatrixXd A = householder(m);
+    std::cout << "Matrix A:\n" << A << '\n';
+
+
 
     return 0;
 }
