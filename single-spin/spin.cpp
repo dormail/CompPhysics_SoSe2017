@@ -42,7 +42,7 @@ void spin::move() {
     double dE = abs(2 * H);
     double p = dis(gen);
 
-    if(p < exp(-1 * beta * dE)){
+    if(p < exp(-1 * dE / beta)){
         s *= -1;
         return;
     }
