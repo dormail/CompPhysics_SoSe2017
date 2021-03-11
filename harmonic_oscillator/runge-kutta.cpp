@@ -17,15 +17,14 @@ void RungeKutta2(Eigen::Vector3d r0,
 {
     Eigen::Vector3d r(r0);
     Eigen::Vector3d v(v0);
-    Eigen::Vector3d k1;
-    Eigen::Vector3d k2;
+    Eigen::Vector3d k;
 
     for(unsigned int i = 0; i<N; ++i)
     {
         r += h*v;
-        k1 = h * F(r);
-        k2 = h * F(r + 0.5 * k1);
-        v += k2;
+        k = h * F(r);
+        k = h * F(r + 0.5 * k) / m;
+        v += k;
         std::cout << r << '\n';
     }
 }
