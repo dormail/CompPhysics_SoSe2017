@@ -23,4 +23,19 @@ void euler(Eigen::Vector3d r0,
            double const m,
            Eigen::Vector3d F(Eigen::Vector3d));
 
+void RungeKutta2(Eigen::Vector3d r0,
+           Eigen::Vector3d v0,
+           double const step,
+           double const N,
+           double const m,
+           Eigen::Vector3d F(Eigen::Vector3d));
+
+void RungeKutta4(Eigen::Vector3d r0,
+           Eigen::Vector3d v0,
+           double const step,
+           double const N,
+           double const m,
+           Eigen::Vector3d F(Eigen::Vector3d));
+
+
 #endif //COMPPHYSICS_SOSE2017_DIFFEQ_H
