@@ -12,6 +12,9 @@ def PlotFromTxt(input, output):
     plt.plot(x, label='x(t)')
     plt.plot(y, label='y(t)')
     plt.plot(z, label='z(t)')
+
+    plt.xlabel('# of integration steps')
+
     plt.legend()
     plt.savefig(output)
     plt.clf()
@@ -19,3 +22,4 @@ def PlotFromTxt(input, output):
 
 # plotting the euler stuff
 PlotFromTxt('res.txt', 'plot.pdf')
+PlotFromTxt('runge-kutta2.txt', 'runge-kutta2.pdf')

@@ -33,7 +33,7 @@ void RungeKutta2(Eigen::Vector3d r0,
 void RungeKutta4(Eigen::Vector3d r0,
            Eigen::Vector3d v0,
            double const step,
-           double const N,
+           int const N,
            double const m,
            Eigen::Vector3d F(Eigen::Vector3d));
 

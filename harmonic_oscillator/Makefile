@@ -9,5 +9,11 @@ runge-kutta: runge-kutta.cpp diffeq.h
 res.txt: diffeq
 	./diffeq > res.txt
 
-plot.pdf: plot.py res.txt
+runge-kutta2.txt: runge-kutta
+	./runge-kutta > runge-kutta2.txt
+
+plot.pdf: plot.py res.txt runge-kutta2.txt
 	python3 plot.py
+
+clean:
+	rm -rf *.pdf runge-kutta2 runge-kutta diffeq *.txt
