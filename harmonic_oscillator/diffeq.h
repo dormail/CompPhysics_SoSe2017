@@ -37,5 +37,9 @@ void RungeKutta4(Eigen::Vector3d r0,
            double const m,
            Eigen::Vector3d F(Eigen::Vector3d));
 
+double E(double mass,
+         Eigen::Vector3d v,
+         Eigen::Vector3d r,
+         double V(Eigen::Vector3d));
 
 #endif //COMPPHYSICS_SOSE2017_DIFFEQ_H

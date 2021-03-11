@@ -8,6 +8,13 @@
 #include <Eigen/Dense>
 #include <iostream>
 
+// potential energy
+double V(Eigen::Vector3d r)
+{
+    return 0.5 * r.norm() * r.norm();
+}
+
+
 void RungeKutta2(Eigen::Vector3d r0,
                  Eigen::Vector3d v0,
                  double const h,
@@ -25,7 +32,7 @@ void RungeKutta2(Eigen::Vector3d r0,
         k = h * F(r) / m;
         k = h * F(r + 0.5 * k) / m;
         v += k;
-        std::cout << r << '\n';
+        std::cout << r << '\n' << E(m, v, r, V) << '\n';
     }
 }
 
@@ -48,8 +55,16 @@ void RungeKutta4(Eigen::Vector3d r0,
         k4 = h * F(r + k3) / m;
 
         v += (k1 + 2 * k2 + 2 * k3 + k4) / 6;
-        std::cout << r << '\n';
+        std::cout << r << '\n' << E(m, v, r, V) << '\n';
     }
+}
+
+double E(double mass,
+         Eigen::Vector3d v,
+         Eigen::Vector3d r,
+         double V(Eigen::Vector3d))
+{
+    return 0.5 * mass * v.norm() * v.norm() + V(r);
 }
 
 Eigen::Vector3d F(Eigen::Vector3d r)
