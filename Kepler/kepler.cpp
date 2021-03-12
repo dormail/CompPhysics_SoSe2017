@@ -13,10 +13,10 @@
 #include <string>
 #include <fstream>
 #include <math.h>
-
-
 #include <iostream>
 
+
+/* Force and its potential for keppler problem */
 Eigen::Vector3d F(Eigen::Vector3d r)
 {
     return -1 * G * r / pow(r.norm(), 3);
@@ -27,6 +27,18 @@ double V(Eigen::Vector3d r)
     return -1 * G / r.norm();
 }
 
+
+/* simulates a motion of a particle with Runge Kutta (4th Order)
+ * Arguments:
+ *   r0, v0 = initial conditions (position and velocity)
+ *   h      = integration step for runge kutta
+ *   N      = number of integration steps
+ *   m      = mass of particle
+ *   F      = Force on the particle, being a conservative for for now
+ *
+ *
+ * untested for m!=1
+ */
 void RungeKutta4(Eigen::Vector3d r0,
                  Eigen::Vector3d v0,
                  double const h,
@@ -51,6 +63,11 @@ void RungeKutta4(Eigen::Vector3d r0,
 }
 
 
+/* uses RungeKutta 4th order to solve a motion of a particle
+ * but stores the result in a std::vector of Eigen::Vector3d
+ *
+ * meaning of arguments: see RungeKutta4(...) above
+ */
 std::vector<Eigen::Vector3d> RungeKutta4Vector(Eigen::Vector3d r0,
                                                Eigen::Vector3d v0,
                                                double const h,
@@ -71,6 +88,7 @@ std::vector<Eigen::Vector3d> RungeKutta4Vector(Eigen::Vector3d r0,
         k4 = h * F(r + k3) / m;
 
         v += (k1 + 2 * k2 + 2 * k3 + k4) / 6;
+
         storage_r.push_back(r);
     }
 
@@ -78,6 +96,7 @@ std::vector<Eigen::Vector3d> RungeKutta4Vector(Eigen::Vector3d r0,
 }
 
 
+/* stores the content of a std::vector<Eigen::Vector3d> in side a file */
 void StdvectorEigenvecToFile(std::vector<Eigen::Vector3d> v, std::string filename)
 {
     std::ofstream output;
@@ -86,20 +105,4 @@ void StdvectorEigenvecToFile(std::vector<Eigen::Vector3d> v, std::string filenam
         output << *it << "\n";
     }
     output.close();
-}
-
-int main()
-{
-    Eigen::Vector3d r0(1., 0., 0.);
-    Eigen::Vector3d v0(0., 1, 0.);
-
-    double h = 0.0015;
-    int N = 4500;
-    double m = 1;
-
-    //RungeKutta4(r0, v0, h, N, m, F);
-    StdvectorEigenvecToFile(RungeKutta4Vector(r0, v0, h, N, m, F), "kepler-test.txt");
-
-
-    return 0;
 }

@@ -29,6 +29,7 @@ void RungeKutta4(Eigen::Vector3d r0,
                  double const m,
                  Eigen::Vector3d F(Eigen::Vector3d));
 
+
 std::vector<Eigen::Vector3d> RungeKutta4Vector(Eigen::Vector3d r0,
                  Eigen::Vector3d v0,
                  double const h,
@@ -38,5 +39,6 @@ std::vector<Eigen::Vector3d> RungeKutta4Vector(Eigen::Vector3d r0,
 
 
 void StdvectorEigenvecToFile(std::vector<Eigen::Vector3d> vec, std::string filename);
+
 
 #endif //COMPPHYSICS_SOSE2017_KEPLER_H
