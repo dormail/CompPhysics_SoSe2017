@@ -10,6 +10,8 @@
 #include <vector>
 #include <Eigen/Dense>
 #include <Eigen/StdVector>
+#include <string>
+#include <fstream>
 #include <math.h>
 
 
@@ -76,16 +78,27 @@ std::vector<Eigen::Vector3d> RungeKutta4Vector(Eigen::Vector3d r0,
 }
 
 
+void StdvectorEigenvecToFile(std::vector<Eigen::Vector3d> v, std::string filename)
+{
+    std::ofstream output;
+    output.open(filename);
+    for(auto it = std::begin(v); it != std::end(v); ++it) {
+        output << *it << "\n";
+    }
+    output.close();
+}
+
 int main()
 {
     Eigen::Vector3d r0(1., 0., 0.);
     Eigen::Vector3d v0(0., 1, 0.);
 
     double h = 0.0015;
-    int N = 2500;
+    int N = 4500;
     double m = 1;
 
-    RungeKutta4(r0, v0, h, N, m, F);
+    //RungeKutta4(r0, v0, h, N, m, F);
+    StdvectorEigenvecToFile(RungeKutta4Vector(r0, v0, h, N, m, F), "kepler-test.txt");
 
 
     return 0;
