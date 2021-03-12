@@ -12,8 +12,8 @@ def PlotFromTxt(input, output):
     E = data[3::4]
 
     plt.plot(x, label='x(t)')
-    plt.plot(y, label='y(t)')
-    plt.plot(z, label='z(t)')
+    # plt.plot(y, label='y(t)')
+    # plt.plot(z, label='z(t)')
     plt.plot(E, label='E(t)')
 
     plt.xlabel('# of integration steps')

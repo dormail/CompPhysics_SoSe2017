@@ -77,7 +77,7 @@ int main()
     Eigen::Vector3d r0(1,0,0);
     Eigen::Vector3d v0(0,0,0);
 
-    double h = 1;
+    double h = 0.01;
     int N = 30 / h;
     RungeKutta4(r0, v0, h, N , 1, F);
     //RungeKutta4(r0, v0, 0.1, 100, 1, F);
